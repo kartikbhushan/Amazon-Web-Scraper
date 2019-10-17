@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import smtplib
 import time
 
-URL= 'https://www.amazon.in/Leoxsys-150Mbps-Wireless-external-LEO-HG150N/dp/B00IWT1JA6/ref=pd_sbs_147_1/258-8740647-9522322?_encoding=UTF8&pd_rd_i=B00IWT1JA6&pd_rd_r=5a4efc61-a0a3-11e9-9984-c74b6c00308f&pd_rd_w=vue4l&pd_rd_wg=vLnbT&pf_rd_p=87667aae-831c-4952-ab47-0ae2a4d747da&pf_rd_r=XTNYM351H13YTTG985RT&psc=1&refRID=XTNYM351H13YTTG985RT'
+URL= '#desired url of amazon product'
 
 #gives some info about my browser MYUSERAGENT
 headers = {"User-Agent" : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'}
@@ -17,7 +17,7 @@ def check_price():
     price= soup.find(id="priceblock_ourprice").get_text()
     converted_price = float(price[1:5])
     #desired price of product 
-    desired_price=800
+    desired_price=#put any price you want 
 
     #printiongn about the product details 
     print("Product Name = "+title.strip())
@@ -44,9 +44,10 @@ def send_mail():
 
     msg = f"Subject : {subject} \n\n{body}"
     
+    #replace Sender and Receiver email with the desired email id's
     server.sendmail(
-        'kb.mg.sg@gmail.com',
-        'kb.mg.sg@gmail.com',
+        'sender_email',
+        'Receiver_email',
         msg
     )
 
@@ -55,11 +56,13 @@ def send_mail():
     #closing all the ocnnections 
     server.quit()
 
-username='kb.mg.sg@gmail.com'
-password="asljstudvgezwbzy"
+username='#put your email id here to login into gmail'
+#suggestion create a Password for less secure apps on gmail and use it here
+password="password"
 
 while(True):
     if check_price():
         print('We have notified stopping the checking process')
         break
+        #sleep for one day you can reduce time as required
     time.sleep(86400)
